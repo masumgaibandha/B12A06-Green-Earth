@@ -48,7 +48,14 @@ const displayCategory = (categories) => {
       
     }
   });
+  const allTreesLi = document.getElementById("all");
+if (allTreesLi) {
+  allTreesLi.classList.add("bg-[#15803D]", "text-white", "rounded");
+}
 };
+
+
+
 const loadPlantsCategories = (categoryId) => {
   console.log(categoryId);
   fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`)
@@ -86,7 +93,7 @@ const displayPlants = (plants) => {
   plants.forEach((plant) => {
     treeContainer.innerHTML += `
  
-     <div class="trees-card shadow-lg p-3 rounded-2xl">
+     <div class="trees-card shadow-lg p-3 rounded-2xl bg-white-500">
        <div>
         <img src="${plant.image}" alt="" class="h-[350px] rounded-2xl w-full pb-5">
       </div>
@@ -115,3 +122,4 @@ const displayPlants = (plants) => {
 const treeContainer = document.getElementById("tree-container");
 
 loadCategories();
+loadAllPlants();
