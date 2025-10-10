@@ -15,23 +15,20 @@ const displayCategory = (categories) => {
   const categoryContainer = document.getElementById("category-container");
   categoryContainer.innerHTML = "";
 
-  const allTrees = document.createElement("ul");
-  allTrees.innerHTML = `
-    <ul class="pt-3 hover:bg-[#15803D] rounded cursor-pointer">
-      <li id="all">All trees</li>
-    </ul>
-  `;
-  categoryContainer.append(allTrees);
+  const allLi = document.createElement("li");
+  allLi.id = "all"
+  allLi.className = "pt-3 hover:bg-[#15803D] rounded cursor-pointer";
+allLi.textContent = "All trees";
+categoryContainer.append(allLi);
 
-  for (let category of categories) {
-    const categoryCard = document.createElement("ul");
-    categoryCard.innerHTML = `
-    <ul class=" pt-3 hover:bg-[#15803D] rounded cursor-pointer">
-            <li id="${category.id}">${category.category_name}</li>
-    </ul>
-    `;
-    categoryContainer.append(categoryCard);
-  }
+for (const category of categories) {
+  const li = document.createElement("li");
+  li.id = String(category.id);
+  li.className = "pt-3 hover:bg-[#15803D] rounded cursor-pointer";
+  li.textContent = category.category_name;
+  categoryContainer.append(li);
+}
+  
   categoryContainer.addEventListener("click", (e) => {
     const allLi = categoryContainer.querySelectorAll("li");
     allLi.forEach((li) => {
@@ -93,7 +90,7 @@ const displayPlants = (plants) => {
   plants.forEach((plant) => {
     treeContainer.innerHTML += `
  
-     <div class="trees-card shadow-lg p-3 rounded-2xl bg-white-500">
+     <div class="trees-card shadow-lg p-3 rounded-2xl bg-white">
        <div>
         <img src="${plant.image}" alt="" class="h-[350px] rounded-2xl w-full pb-5">
       </div>
