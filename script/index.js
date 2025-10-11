@@ -103,7 +103,7 @@ const displayPlants = (plants) => {
  
      <div class="trees-card shadow-lg p-3 rounded-2xl bg-white">
        <div>
-        <img src="${plant.image}" alt="" class="h-[350px] rounded-2xl w-full pb-5">
+        <img src="${plant.image}" alt="" class="h-[280px] rounded-2xl w-full pb-5">
       </div>
       <div>
         <h1 onClick ="loadTreeDetails(${plant.id})" class="font-bold pb-3 tree-title">${plant.name}</h1>
@@ -206,7 +206,7 @@ for(let item of cart){
    <div class="flex justify-center items-center">
     <div class="card-body">
     <h2 class="card-title">${item.treeTitle}</h2>
-    <span class= "item-price">${item.treePrice}</span>
+    <span class="item-price">৳${item.treePrice}</span>
     
   </div> 
   <div  onClick = "removeCart(this)"><i class="fa-solid fa-xmark mr-8"></i></div>
