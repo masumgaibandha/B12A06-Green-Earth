@@ -56,13 +56,13 @@
     <h1 class="text-3xl font-bold text-center">Choose Your Trees</h1>
  
 
-    <div class="food-container py-5 grid grid-cols-12 gap-5 min-h-screen">
+    <div class="tree-container py-5 grid grid-cols-1 md:grid-cols-12 gap-5 min-h-screen">
       <!-- Left Category -->
-      <div class="left-categories col-span-2">
+      <div class="left-categories md:col-span-2 col-span-1">
         <div>
         <h1 class="font-bold text-xl">categories</h1>
         <div>
-          <ul  id="category-container" class="space-y-2 p-3">
+          <ul  id="category-container" class="space-y-2 p-3 md:p-3 p-2">
             
           </ul>
         </div>
@@ -71,7 +71,7 @@
     </div>
 
     <!-- Main Trees -->
-    <div class="our-food col-span-8">
+    <div class="our-food md:col-span-8 col-span-1">
      
       <div id="loading-spinner" class="min-h-[60vh] flex flex-col justify-center items-center bg-white hidden">
         <span class="loading loading-dots loading-xl"></span>
@@ -83,7 +83,7 @@
       </div>
      
       <!-- Right Cart -->
-    <div class="right-categories bg-white col-span-2 p-3 rounded">
+    <div class="right-categories bg-white md:col-span-2 col-span-1 p-3 rounded order-3">
       <h1 class="font-bold text-xl">Your Cart</h1>
     <div id="cart-container"></div>
     
@@ -134,14 +134,14 @@
 <!-- About Campaign Section -->
 <section class="mt-10">
   <h1 class="text-center text-3xl font-bold text-[#1F2937] pb-10">About the Campaign</h1>
-  <div class="flex flex-col md:flex-row items-center justify-center w-11/12 mx-auto">
+  <div class="flex flex-col md:flex-row items-center justify-center w-11/12 mx-auto gap-8">
     
     <div class="flex justify-center w-full md:w-1/2 pb-10">
-      <img src="./assets/about.png" alt="">
+      <img src="./assets/about.png" alt="" class="max-w-full h-auto">
     
     </div>
     <div class="w-full md:w-1/2 text-center md:text-left space-y-2">
-      <p class="text-[#374151] w-[530px]">Green Earth is a global tree plantation initiative dedicated to fighting climate change. Since our start, we’ve planted over 500,000 trees worldwide. By joining our campaign, you help restore forests, create habitats for wildlife, and combat global warming.</p>
+      <p class="text-[#374151] md:w-[530px] w-full">Green Earth is a global tree plantation initiative dedicated to fighting climate change. Since our start, we’ve planted over 500,000 trees worldwide. By joining our campaign, you help restore forests, create habitats for wildlife, and combat global warming.</p>
     <ul class="p-5 list-disc list-inside space-y-2">
       <li>Restoration of natural habitats</li>
       <li>Improvement of air quality</li>
@@ -159,17 +159,17 @@
   
   <div class="space-y-4">
     <h1 class="text-4xl font-bold text-center text-[#1F2937] pb-5">Our Impact</h1>
-   <div class="flex justify-between w-10/12 mx-auto mt-10">
+   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-10/12 mx-auto mt-10">
     
-    <div class="w-[516px] h-[156px] bg-[#ffffff] shadow-xl flex flex-col items-center justify-center text-center rounded-2xl">
+    <div class="w-full h-[156px] bg-white shadow-xl flex flex-col items-center justify-center text-center rounded-2xl">
   <h2 class="text-4xl font-bold text-[#15803D]">500K+</h2>
   <p class="text-xl text-gray-700">Trees Planted</p>
   </div>
-   <div class="w-[516px] h-[156px] bg-[#ffffff] shadow-xl flex flex-col items-center justify-center text-center rounded-2xl">
+   <div class="w-full h-[156px] bg-white shadow-xl flex flex-col items-center justify-center text-center rounded-2xl">
   <h2 class="text-4xl font-bold text-[#15803D]">120+</h2>
   <p class="text-xl text-gray-700">Communities Involved</p>
   </div>
-   <div class="w-[516px] h-[156px] bg-[#ffffff] shadow-xl flex flex-col items-center justify-center text-center rounded-2xl">
+   <div class="w-full h-[156px] bg-white shadow-xl flex flex-col items-center justify-center text-center rounded-2xl">
   <h2 class="text-4xl font-bold text-[#15803D]">30+</h2>
   <p class="text-xl text-gray-700">Countries Reached</p>
   </div>
@@ -182,7 +182,7 @@
 <section class="bg-[#15803D] py-20 px-5">
   <h1 class="text-white text-3xl text-center font-bold">Plant a Tree Today</h1>
   <div class="flex justify-center items-center min-h-[50vh]">
-    <div class="card bg-[#4EAD71] rounded-[12px] box-shadow: 0px 4px 22px 0px #0000000F; w-[550px] aspect-[3/2] flex items-center justify-center">
+    <div class="card bg-[#4EAD71] rounded-[12px] w-full max-w-[550px] aspect-[3/2] flex items-center justify-center shadow-[0_4px_22px_#0000000F]">
       <div class="card-body w-full p-8">
         <fieldset class="fieldset space-y-4">
           <input type="text" class="input input-bordered w-full" placeholder="Your Name"/>
