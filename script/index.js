@@ -55,6 +55,9 @@ if (allTreesLi) {
 
 
 const loadPlantsCategories = (categoryId) => {
+  document.getElementById("tree-container").classList.add("hidden");
+  document.getElementById("loading-spinner").classList.remove("hidden");
+
   fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`)
     .then((res) => res.json())
     .then((data) => {
@@ -62,9 +65,13 @@ const loadPlantsCategories = (categoryId) => {
     })
     .catch((err) => {
       console.log(err);
+    document.getElementById("loading-spinner").classList.add("hidden");
+    document.getElementById("tree-container").classList.remove("hidden");
     });
 };
 const loadAllPlants = async () => {
+  document.getElementById("tree-container").classList.add("hidden");
+  document.getElementById("loading-spinner").classList.remove("hidden");
   try {
     const res = await fetch("https://openapi.programming-hero.com/api/categories");
     const data = await res.json();
@@ -80,6 +87,7 @@ const loadAllPlants = async () => {
   } catch (err) {
     console.error("Error loading all plants:", err);
   }
+ 
 };
 // Modal Tree details
 const loadTreeDetails = (id) =>{
@@ -89,9 +97,7 @@ const loadTreeDetails = (id) =>{
   .then((data) => displayTreesDetails(data.plants))
 
 }
-// const displayLoadTreeDetails = (plants) =>{
 
-// }
 
 const displayPlants = (plants) => {
   treeContainer.innerHTML = "";
@@ -123,6 +129,8 @@ const displayPlants = (plants) => {
        
 `;
   });
+   document.getElementById("tree-container").classList.remove("hidden");
+  document.getElementById("loading-spinner").classList.add("hidden");
 };
 
 const displayTreesDetails = (plant) =>{
