@@ -6,6 +6,7 @@ const loadCategories = () => {
 };
 let cart = [];
 let total = 0;
+const cartLimit = 10;
 
 const displayCategory = (categories) => {
   // console.log(categories)
@@ -164,10 +165,13 @@ const treeContainer = document.getElementById("tree-container");
 loadCategories();
 loadAllPlants();
 
-// document.getElementById('tree-container').addEventListener('click', (e) =>{
-//   console.log(e.target)
-// })
+
 const addToCard = (btn) =>{
+  if(cart.length >= cartLimit){
+    showCartNotice(`Limit Reached: maximum ${cartLimit} items.`);
+    disableAddButtons(true);
+    return;
+  }
  const card = btn.parentNode.parentNode;
  const treeTitle = card.querySelector(".tree-title").innerText;
  const treePrice = card.querySelector(".tree-price").innerText;
@@ -219,7 +223,8 @@ const removeCart = (btn) =>{
   console.log(treeTitle)
   
   cart = cart.filter((item) => item.treeTitle != treeTitle);
-  total = total - treePrice; 
+  total = 0;
+  cart.forEach((item) => (total += item.treePrice));
   displayCart(cart)
   displayTotal(total);
   
