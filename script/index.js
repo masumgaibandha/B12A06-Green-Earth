@@ -101,18 +101,18 @@ const displayPlants = (plants) => {
   plants.forEach((plant) => {
     treeContainer.innerHTML += `
  
-     <div class="trees-card shadow-lg p-3 rounded-2xl bg-white">
+     <div class="trees-card bg-white shadow-lg rounded-2xl p-3 h-full flex flex-col">
        <div>
-        <img src="${plant.image}" alt="" class="h-[280px] rounded-2xl w-full pb-5">
+        <img src="${plant.image}" alt="" class="w-full h-64 object-cover rounded-2xl pb-5">
       </div>
       <div>
         <h1 onClick ="loadTreeDetails(${plant.id})" class="font-bold pb-3 tree-title">${plant.name}</h1>
       <p>${plant.description}</p>
-      <div class="flex justify-between py-2">
+      <div class="flex justify-between items-center py-2 mt-2">
         <button class="btn rounded-2xl bg-[#DCFCE7]  text-[#15803D]">
         ${plant.category}
       </button>
-      <span class="tree-price">${plant.price}</span>
+      <span class="tree-price">৳${plant.price}</span>
       </div>
 
       </div>
@@ -175,7 +175,7 @@ const addToCard = (btn) =>{
  const card = btn.parentNode.parentNode;
  const treeTitle = card.querySelector(".tree-title").innerText;
  const treePrice = card.querySelector(".tree-price").innerText;
- const treePriceNum = Number(treePrice);
+ const treePriceNum = Number(treePrice.replace(/[^\d.]/g, ""));
 //  console.log(treeTitle, treePriceNum);
 
 const selectedItem = {
