@@ -4,12 +4,8 @@ const loadCategories = () => {
     .then((res) => res.json())
     .then((data) => displayCategory(data.categories));
 };
-// {
-//     "id": 1,
-//     "category_name": "Fruit Tree",
-//     "small_description": "Trees that bear edible fruits like mango, guava, and jackfruit."
-// }
-
+let cart = [];
+let total = 0;
 
 const displayCategory = (categories) => {
   // console.log(categories)
@@ -109,19 +105,19 @@ const displayPlants = (plants) => {
         <img src="${plant.image}" alt="" class="h-[350px] rounded-2xl w-full pb-5">
       </div>
       <div>
-        <h1 onClick ="loadTreeDetails(${plant.id})" class="font-bold pb-3">${plant.name}</h1>
+        <h1 onClick ="loadTreeDetails(${plant.id})" class="font-bold pb-3 tree-title">${plant.name}</h1>
       <p>${plant.description}</p>
       <div class="flex justify-between py-2">
         <button class="btn rounded-2xl bg-[#DCFCE7]  text-[#15803D]">
         ${plant.category}
       </button>
-      <span>৳${plant.price}</span>
+      <span class="tree-price">${plant.price}</span>
       </div>
 
       </div>
-      <!-- Button -->
-      <div class="btn w-full rounded-3xl bg-[#15803D] text-white">
-        Add to Cart
+      
+      <div>
+        <button onClick = "addToCard(this)" class="btn btn-active w-full rounded-3xl bg-[#15803D] text-white btn-add">Add to Cart</button>
       </div>
 
      
@@ -133,6 +129,7 @@ const displayPlants = (plants) => {
   document.getElementById("loading-spinner").classList.add("hidden");
 };
 
+// Modals details
 const displayTreesDetails = (plant) =>{
   const detailsContainer = document.getElementById("details-container");
   detailsContainer.innerHTML = `
@@ -141,20 +138,20 @@ const displayTreesDetails = (plant) =>{
         <img src="${plant.image}" alt="" class="h-[350px] rounded-2xl w-full pb-5">
       </div>
       <div>
-        <h1 class="font-semibold">${plant.name}</h1>
+        <h1 class="font-semibold tree-title">${plant.name}</h1>
       <p>${plant.description}</p>
       <div class="flex justify-between py-2">
         <button class="btn rounded-2xl bg-[#DCFCE7]  text-[#15803D]">
         ${plant.category}
       </button>
-      <span>৳${plant.price}</span>
+      <span class="tree-price">${plant.price}</span>
       </div>
 
       </div>
-      <!-- Button -->
-      <div class="btn w-full rounded-3xl bg-[#15803D] text-white">
-        Add to Cart
+      <div>
+        <button onClick = "addToCard()" class="btn btn-active w-full rounded-3xl bg-[#15803D] text-white btn-add">Add to Cart</button>
       </div>
+      
      </div>
   `;
   document.getElementById('my_modal_3').showModal();
@@ -166,3 +163,65 @@ const treeContainer = document.getElementById("tree-container");
 
 loadCategories();
 loadAllPlants();
+
+// document.getElementById('tree-container').addEventListener('click', (e) =>{
+//   console.log(e.target)
+// })
+const addToCard = (btn) =>{
+ const card = btn.parentNode.parentNode;
+ const treeTitle = card.querySelector(".tree-title").innerText;
+ const treePrice = card.querySelector(".tree-price").innerText;
+ const treePriceNum = Number(treePrice);
+//  console.log(treeTitle, treePriceNum);
+
+const selectedItem = {
+  treeTitle: treeTitle,
+  treePrice: treePriceNum,
+}
+cart.push(selectedItem)
+console.log(cart)
+total += treePriceNum;
+displayCart(cart)
+displayTotal(total); 
+}
+ const displayTotal = (val) => {
+  document.getElementById('cart-total').innerHTML = `৳${val}`;
+ }
+// {
+//     "treeTitle": "Mango Tree",
+//     "treePrice": 500
+// }
+const displayCart = (cart) =>{
+const cartContainer = document.getElementById('cart-container');
+cartContainer.innerHTML = "";
+for(let item of cart){
+  const newItem = document.createElement("div")
+  newItem.innerHTML = `
+  <div class="card bg-[#f0fdf4] shadow-lg gap-6 mb-3 rounded">
+ 
+   <div class="flex justify-center items-center">
+    <div class="card-body">
+    <h2 class="card-title">${item.treeTitle}</h2>
+    <span class= "item-price">${item.treePrice}</span>
+    
+  </div> 
+  <div  onClick = "removeCart(this)"><i class="fa-solid fa-xmark mr-8"></i></div>
+   </div>
+  </div>
+  `
+  cartContainer.append(newItem);
+}
+}
+const removeCart = (btn) =>{
+  const item = btn.parentNode;
+  const treeTitle = item.querySelector('.card-title').innerText;
+  const treePrice = Number(item.querySelector('.item-price').innerText);
+  console.log(treeTitle)
+  
+  cart = cart.filter((item) => item.treeTitle != treeTitle);
+  total = total - treePrice; 
+  displayCart(cart)
+  displayTotal(total);
+  
+  
+}
