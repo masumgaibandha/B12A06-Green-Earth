@@ -135,27 +135,27 @@ const displayTreesDetails = (plant) =>{
   const detailsContainer = document.getElementById("details-container");
   detailsContainer.innerHTML = `
   <div class="shadow-lg trees-card p-3 rounded-2xl shadow-[0_8px_30px_rgba(255,255,255,0.8)]">
-       <div>
+    <div><h1 class="font-semibold tree-title text-xl font-bold">${plant.name}</h1></div>   
+  <div>
         <img src="${plant.image}" alt="" class="h-[350px] rounded-2xl w-full pb-5">
       </div>
       <div>
-        <h1 class="font-semibold tree-title">${plant.name}</h1>
-      <p>${plant.description}</p>
-      <div class="flex justify-between py-2">
-        <button class="btn rounded-2xl bg-[#DCFCE7]  text-[#15803D]">
-        ${plant.category}
+        <h1 class ="font-bold">Category: ${plant.category}</h1>
+        <span class="tree-price block mb-2">Price: ৳${plant.price}</span>
+      <p>Description: ${plant.description}</p>
+      </div>
+      <div class="flex justify-end pt-4">
+      <button id="modal-close-btn" class="btn bg-gray-200 text-black rounded">
+        Close
       </button>
-      <span class="tree-price">${plant.price}</span>
-      </div>
-
-      </div>
-      <div>
-        <button onClick = "addToCard()" class="btn btn-active w-full rounded-3xl bg-[#15803D] text-white btn-add">Add to Cart</button>
-      </div>
-      
-     </div>
+    </div>
+  </div>
   `;
-  document.getElementById('my_modal_3').showModal();
+  const modal = document.getElementById('my_modal_3');
+modal.showModal();
+document.getElementById('modal-close-btn').addEventListener('click', () => {
+  modal.close();
+})
   
 
 }
@@ -187,6 +187,7 @@ console.log(cart)
 total += treePriceNum;
 displayCart(cart)
 displayTotal(total); 
+showAddedModal(treeTitle);
 }
  const displayTotal = (val) => {
   document.getElementById('cart-total').innerHTML = `৳${val}`;
@@ -206,7 +207,7 @@ for(let item of cart){
    <div class="flex justify-center items-center">
     <div class="card-body">
     <h2 class="card-title">${item.treeTitle}</h2>
-    <span class="item-price">৳${item.treePrice}</span>
+    <span class="item-price">৳${item.treePrice} x 1</span>
     
   </div> 
   <div  onClick = "removeCart(this)"><i class="fa-solid fa-xmark mr-8"></i></div>
@@ -230,3 +231,11 @@ const removeCart = (btn) =>{
   
   
 }
+
+const showAddedModal = (title) => {
+  const modal = document.getElementById('cart_modal');
+  document.getElementById('cart_modal_msg').textContent = `${title} has been added to the cart.`;
+  modal.showModal();
+  document.getElementById('cart_modal_ok').onclick = () => modal.close();
+};
+
