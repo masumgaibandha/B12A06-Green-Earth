@@ -10,6 +10,7 @@ const loadCategories = () => {
 //     "small_description": "Trees that bear edible fruits like mango, guava, and jackfruit."
 // }
 
+
 const displayCategory = (categories) => {
   // console.log(categories)
   const categoryContainer = document.getElementById("category-container");
@@ -54,7 +55,6 @@ if (allTreesLi) {
 
 
 const loadPlantsCategories = (categoryId) => {
-  console.log(categoryId);
   fetch(`https://openapi.programming-hero.com/api/category/${categoryId}`)
     .then((res) => res.json())
     .then((data) => {
@@ -69,8 +69,6 @@ const loadAllPlants = async () => {
     const res = await fetch("https://openapi.programming-hero.com/api/categories");
     const data = await res.json();
     const ids = data.categories.map(cat => cat.id);
-
-    // fetch plants from all categories
     const all = await Promise.all(
       ids.map(id =>
         fetch(`https://openapi.programming-hero.com/api/category/${id}`)
@@ -83,7 +81,17 @@ const loadAllPlants = async () => {
     console.error("Error loading all plants:", err);
   }
 };
+// Modal Tree details
+const loadTreeDetails = (id) =>{
+  const url = `https://openapi.programming-hero.com/api/plant/${id}`
+  fetch(url)
+  .then(res => res.json())
+  .then((data) => displayTreesDetails(data.plants))
 
+}
+// const displayLoadTreeDetails = (plants) =>{
+
+// }
 
 const displayPlants = (plants) => {
   treeContainer.innerHTML = "";
@@ -95,7 +103,7 @@ const displayPlants = (plants) => {
         <img src="${plant.image}" alt="" class="h-[350px] rounded-2xl w-full pb-5">
       </div>
       <div>
-        <h1 class="font-bold pb-3">${plant.name}</h1>
+        <h1 onClick ="loadTreeDetails(${plant.id})" class="font-bold pb-3">${plant.name}</h1>
       <p>${plant.description}</p>
       <div class="flex justify-between py-2">
         <button class="btn rounded-2xl bg-[#DCFCE7]  text-[#15803D]">
@@ -116,6 +124,36 @@ const displayPlants = (plants) => {
 `;
   });
 };
+
+const displayTreesDetails = (plant) =>{
+  const detailsContainer = document.getElementById("details-container");
+  detailsContainer.innerHTML = `
+  <div class="shadow-lg trees-card p-3 rounded-2xl shadow-[0_8px_30px_rgba(255,255,255,0.8)]">
+       <div>
+        <img src="${plant.image}" alt="" class="h-[350px] rounded-2xl w-full pb-5">
+      </div>
+      <div>
+        <h1 class="font-semibold">${plant.name}</h1>
+      <p>${plant.description}</p>
+      <div class="flex justify-between py-2">
+        <button class="btn rounded-2xl bg-[#DCFCE7]  text-[#15803D]">
+        ${plant.category}
+      </button>
+      <span>৳${plant.price}</span>
+      </div>
+
+      </div>
+      <!-- Button -->
+      <div class="btn w-full rounded-3xl bg-[#15803D] text-white">
+        Add to Cart
+      </div>
+     </div>
+  `;
+  document.getElementById('my_modal_3').showModal();
+  
+
+}
+
 const treeContainer = document.getElementById("tree-container");
 
 loadCategories();
